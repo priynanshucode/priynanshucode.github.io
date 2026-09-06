@@ -10,16 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v6
-      - name: Expand initial source upload
-        if: hashFiles('package.json') == ''
-        run: |
-          unzip -o portfolio-source.zip -x '.github/*' '.openai/*'
-          git add .
-          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Expand portfolio source into editable repository files'
-          git push
       - uses: actions/setup-node@v4
         with:
           node-version: 24
